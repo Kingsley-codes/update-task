@@ -71,7 +71,7 @@ const UpdateTaskForm = ({ onClose, task }: UpdateTaskFormProps) => {
       formData.append("currency", currency);
       formData.append("noOfRespondents", noOfRespondents);
       if (files) {
-        formData.append("file", files);
+        formData.append("files", files);
       }
 
       const response = await fetch(
@@ -146,6 +146,23 @@ const UpdateTaskForm = ({ onClose, task }: UpdateTaskFormProps) => {
                 <option value="delivery">Delivery</option>
               </select>
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">No of Respondents</label>
+              <select
+                value={noOfRespondents}
+                onChange={(e) => setNoOfRespondents(e.target.value)}
+                className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                required
+              >
+                <option value="">0-5</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
           </div>
 
           {/* Description */}
@@ -154,6 +171,66 @@ const UpdateTaskForm = ({ onClose, task }: UpdateTaskFormProps) => {
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              className="mt-1 p-2 border border-gray-300 rounded-md w-full h-28"
+              required
+            ></textarea>
+          </div>
+
+          {/* Location, Compensation, and Deadline */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Location</label>
+              <select
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              >
+                <option value="">Select Location</option>
+                <option value="Remote">Remote</option>
+                <option value="On-site">On-site</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Compensation</label>
+              <div className="flex items-center mt-1">
+                <span className="p-2 border border-gray-300 rounded-l-md bg-gray-100">$</span>
+                <input
+                  type="text"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  className="p-2 border-t border-b border-r border-gray-300 rounded-r-md w-full"
+                  required
+                />
+                <select
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value)}
+                  className="ml-2 p-2 border border-gray-300 rounded-md"
+                >
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Deadline</label>
+              <input
+                type="date"
+                value={deadline}
+                onChange={(e) => setDeadline(e.target.value)}
+                className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                required
+              />
+            </div>
+          </div>
+
+          {/* Requirements */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Requirements</label>
+            <textarea
+              value={requirements}
+              onChange={(e) => setRequirements(e.target.value)}
               className="mt-1 p-2 border border-gray-300 rounded-md w-full h-28"
               required
             ></textarea>
